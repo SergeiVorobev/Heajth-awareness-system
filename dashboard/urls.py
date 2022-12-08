@@ -1,8 +1,9 @@
-from django.urls import path
-from django.views.generic import TemplateView
+"""Define urls for dashboard package"""
+# from django.urls import path
 
-app_name = 'dashboard'
+# from .views import home
+# app_name = 'dashboard'
 
-urlpatterns = [
-    path('', TemplateView.as_view(template_name='home/index.html')) 
-]
+# urlpatterns = [
+#     path('', home, name="users-home"),
+# ]
