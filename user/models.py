@@ -1,3 +1,4 @@
+"""Class models for user package"""
 from django import forms
 from django.db import models
 from django.contrib.auth.models import User
@@ -5,8 +6,9 @@ from PIL import Image
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    """Class model for user profile"""
 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     bio = models.TextField()
 
@@ -15,6 +17,8 @@ class Profile(models.Model):
 
     # resizing images
     def save(self, *args, **kwargs):
+        """save Profile data"""
+
         super().save()
 
         img = Image.open(self.avatar.path)
@@ -26,6 +30,8 @@ class Profile(models.Model):
             rgb_im.save(self.avatar.path)
 
 class UpdateUserForm(forms.ModelForm):
+    """Form class for updating user credentials"""
+
     username = forms.CharField(max_length=100,
                                required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -33,14 +39,18 @@ class UpdateUserForm(forms.ModelForm):
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
+        """Class Meta to access ''username', 'email' data"""
         model = User
         fields = ['username', 'email']
 
 
 class UpdateProfileForm(forms.ModelForm):
+    """Form class for updating user profile"""
+
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
 
     class Meta:
+        """Class Meta to access 'avatar' and 'bio' data"""
         model = Profile
         fields = ['avatar', 'bio']
