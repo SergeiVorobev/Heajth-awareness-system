@@ -1,3 +1,4 @@
+"""Models Registration for Admin"""
 from django.contrib import admin
 from .models import CategoryQuestion, Question, Answer, Suggestion
 
