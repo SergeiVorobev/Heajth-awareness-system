@@ -1,9 +1,13 @@
 """Define urls for learning package"""
-# from django.urls import path
-# from .views import *
+from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
-app_name = 'learning' # noqa
+from . import views
+
+app_name = 'learning' 
 
 urlpatterns = [
-    # path('<int:pk>/', SuggestionDetail.as_view(), 'create')
-]
+    path('', views.list_cards, name='list-cards')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
