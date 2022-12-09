@@ -109,7 +109,7 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('users-profile')
 
 
-@login_required(login_url='login')
+@login_required(login_url='user:login')
 def profile(request):
     """update profile data"""
     if request.method == 'POST':
@@ -120,10 +120,10 @@ def profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect('users-profile')
+            return redirect(to='user:users-profile')
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'user/profile.html', {'user_form': user_form, 
+    return render(request, 'auth/profile.html', {'user_form': user_form, 
     'profile_form': profile_form})
