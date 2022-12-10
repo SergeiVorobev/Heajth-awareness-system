@@ -26,11 +26,39 @@
    
     </div>
     <div class="center">
-        <p>
-    Date and time: {{ date }} {{ time }}
-    </p>
-
-    </div>
+        {#    <h1 class="opaqueWhite"> Venue Shine</h1>#}
+            <br/> <br/>
+            <h3>Find or create a new events <br>whenever and wherever you want.</h3>
+            <br/><br/><br/>
+        
+        </div>
+        
+        <div class="center">
+            <h2> Calendar for {{ month }} {{ year }}</h2>
+            <br/>
+        </div>
+        
+            <br/><br/>
+        
+        <div class="center">
+            <div class="opaqueWhite">
+                {{ cal|safe }}
+            </div>
+        </div>
+        
+            <br/><br/><br/>
+        
+        <div class="center">
+            <p>
+            Current time: {{ time }}
+            </p>
+        <br/><br/><br/>
+        </div>
+            <div class="center">
+            <p>
+               Copyright (c) {{ current_year }}
+            </p>
+        </div>
 
 
 {% endblock %}

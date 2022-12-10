@@ -8,24 +8,37 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
-
+import calendar
+from calendar import HTMLCalendar
+from datetime import datetime
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 
 @login_required(login_url='user:login')
-def home(request):
-    """function for home page"""
+def home(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
+   
+    month = month.capitalize()
+    # Convert month from name to number
+    month_number = list(calendar.month_name).index(month)
+    month_number = int(month_number)
+
+    # create a calendar
+    cal = HTMLCalendar().formatmonth(year, month_number)
     # Get current year
     now = datetime.now()
-    year_ = now.strftime('%Y')
-    date_ = now.strftime("%d %B %Y, ")
-    hours = str(int(now.strftime('%H')) + 1)
-    time_ = hours + now.strftime(':%M:%S')
+    current_year = now.year
+    # Get current time
+    time = now.strftime('%I:%M:%S %p')
     return render(request, 'base/home.html', {
-       'date': date_,
-        'year': year_,
-        'time' : time_,
-    })
+                      "year": year,
+                      "month": month,
+                      "month_number": month_number,
+                      "cal": cal,
+                      "current_year": current_year,
+                      "time": time,
+                  }
+                  )
+
 
 
 class RegisterView(View):
