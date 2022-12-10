@@ -10,6 +10,8 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    age = models.IntegerField(default=30)
+    height = models.IntegerField(default=180)
     bio = models.TextField()
 
     def __str__(self):
@@ -43,14 +45,16 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ['username', 'email']
 
-
 class UpdateProfileForm(forms.ModelForm):
     """Form class for updating user profile"""
 
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    age = models.IntegerField(default=30)
+    height = models.IntegerField(default=180)
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
 
     class Meta:
-        """Class Meta to access 'avatar' and 'bio' data"""
+        """Class Meta to access 'avatar', 'age', 'height' and 'bio' data"""
         model = Profile
-        fields = ['avatar', 'bio']
+        fields = ['avatar', 'age', 'height', 'bio']
+
