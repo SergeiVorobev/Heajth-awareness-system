@@ -67,9 +67,13 @@ class UpdateProfileForm(forms.ModelForm):
     """Class form for updating user profile"""
 
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    age = forms.IntegerField(min_value=18, max_value=110,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Age', 'rows': 1}))
+    height = forms.IntegerField(min_value=50, max_value=250,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Height', 'rows': 1}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
 
     class Meta:
-        """Class Meta to access 'avatar' and 'bio' data"""
+        """Class Meta to access 'avatar', 'age', 'height' and 'bio' data"""
         model = Profile
-        fields = ['avatar', 'bio']
+        fields = ['avatar', 'age', 'height', 'bio']
