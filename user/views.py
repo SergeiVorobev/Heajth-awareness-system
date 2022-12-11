@@ -11,7 +11,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
+
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
+from dashboard.models import HealthData
 
 
 @login_required(login_url='user:login')
@@ -29,13 +31,17 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     current_year = now.year
     # Get current time
     time = now.strftime('%I:%M:%S %p')
+
+    health_data = HealthData.objects.all()
     return render(request, 'base/home.html', {
-                      "year": year,
-                      "month": month,
-                      "month_number": month_number,
-                      "cal": cal,
-                      "current_year": current_year,
-                      "time": time,
+                    "year": year,
+                    "month": month,
+                    "month_number": month_number,
+                    "cal": cal,
+                    "current_year": current_year,
+                    "time": time,
+                    "health_data": health_data,
+
                   }
                   )
 

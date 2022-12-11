@@ -12,7 +12,7 @@ class Profile(models.Model):
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
     age = models.IntegerField(default=30)
     height = models.IntegerField(default=180)
-    bio = models.TextField()
+    bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -57,4 +57,3 @@ class UpdateProfileForm(forms.ModelForm):
         """Class Meta to access 'avatar', 'age', 'height' and 'bio' data"""
         model = Profile
         fields = ['avatar', 'age', 'height', 'bio']
-
