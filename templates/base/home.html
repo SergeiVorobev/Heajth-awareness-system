@@ -26,10 +26,7 @@
    
     </div>
     <div class="center">
-        {#    <h1 class="opaqueWhite"> Venue Shine</h1>#}
-            <br/> <br/>
-            <h3>Find or create a new events <br>whenever and wherever you want.</h3>
-            <br/><br/><br/>
+    
         
         </div>
         
@@ -52,6 +49,36 @@
             <p>
             Current time: {{ time }}
             </p>
+            <h1 class="opaqueWhite" style="text-align: center">Health data</h1>
+        </div>
+        <br/>
+        {% comment %} <form class="form-inline my-2 my-lg-0" method= POST action="{% url 'search-venues' %}">
+            {% csrf_token %}
+
+            <input class="form-control mr-sm-2" type="search" placeholder="Venue" aria-label="Search" name="searched">
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="background-color: darkgrey">Search</button>
+
+        </form> {% endcomment %}
+        <br/>
+        <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 1000px">
+            {% for data in health_data %}
+                <tr>
+                    <td>
+                        <p style="color: black; font-size:22px">{{ data }}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br/>
+
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            {% comment %} <div class="btn-group mr-2" role="group" aria-label="First group">
+                <a href="{%  url 'home' %}" class="btn btn-secondary" >BACK</a>
+            </div> {% endcomment %}
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
+            </div>
+            </div>
         <br/><br/><br/>
         </div>
             <div class="center">
