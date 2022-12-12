@@ -8,7 +8,7 @@ from . import views
 from .views import RegisterView, CustomLoginView, ResetPasswordView, profile, ChangePasswordView
 from .forms import LoginForm
 
-app_name = 'user' # noqa
+app_name = 'user'
 
 
 urlpatterns =[

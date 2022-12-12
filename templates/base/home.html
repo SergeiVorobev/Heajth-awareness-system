@@ -11,81 +11,94 @@
     overflow: auto;
     }
     .table-wrapper-scroll-y {
-    display: block;
+    display: block
+    }
+    .btn-toolbar {
+        position: absolute;
+    }
+    .calendar {
+        position: 
     }
     </style>
 
-
-    <div class="item1" style="
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: honeydew;
-    ">
-   
-    </div>
     <div class="center">
+        <div class="opaqueWhite" style=''>
+            {{ cal|safe }}
+        </div>
+    </div>
     
-        
-        </div>
-        
-        <div class="center">
-            <h2> Calendar for {{ month }} {{ year }}</h2>
-            <br/>
-        </div>
-        
-            <br/><br/>
-        
-        <div class="center">
-            <div class="opaqueWhite">
-                {{ cal|safe }}
-            </div>
-        </div>
-        
-            <br/><br/><br/>
-        
-        <div class="center">
-            <p>
-            Current time: {{ time }}
-            </p>
-            <h1 class="opaqueWhite" style="text-align: center">Health data</h1>
-        </div>
-        <br/>
-        {% comment %} <form class="form-inline my-2 my-lg-0" method= POST action="{% url 'search-venues' %}">
-            {% csrf_token %}
-
-            <input class="form-control mr-sm-2" type="search" placeholder="Venue" aria-label="Search" name="searched">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="background-color: darkgrey">Search</button>
-
-        </form> {% endcomment %}
-        <br/>
-        <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 1000px">
+        <br/><br/><br/>
+    
+    <div class="center">
+        <p>
+        Current time: {{ time }}
+        </p>
+        <h1 class="opaqueWhite" style="text-align: center">Health data</h1>
+    </div>
+    <div>
+        <canvas id="Glucose"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('Glucose');
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: {{date|safe}},
+            datasets: [{
+              label: 'Glucose',
+              data: {{glucose|safe}},
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: false
+              }
+            }
+          }
+        });
+      </script>
+    <br/>
+    <br/>
+    <div class="center">
+        <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 300px; margin-left:auto; margin-right:auto;">
             {% for data in health_data %}
                 <tr>
                     <td>
                         <p style="color: black; font-size:22px">{{ data }}</p>
                     </td>
+                    <td>
+                        <p style="color: black; font-size:22px">{{ data.weight }}</p>
+                    </td>
+                    <td>
+                        <p style="color: black; font-size:22px">{{ data.gl_level }}</p>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
-        <br/>
+    </div>
+    <br/>
 
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            {% comment %} <div class="btn-group mr-2" role="group" aria-label="First group">
-                <a href="{%  url 'home' %}" class="btn btn-secondary" >BACK</a>
-            </div> {% endcomment %}
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
-            </div>
-            </div>
-        <br/><br/><br/>
+    <div class="center" role="toolbar" aria-label="Toolbar with button groups">
+        {% comment %} <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a href="{%  url 'home' %}" class="btn btn-secondary" >BACK</a>
+        </div> {% endcomment %}
+        <div class="btn-group mr-2" role="group" aria-label="Second group">
+            <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
         </div>
-            <div class="center">
-            <p>
-               Copyright (c) {{ current_year }}
-            </p>
-        </div>
+    </div>
+    <br/><br/><br/>
+    </div>
+        <div class="center">
+        <p>
+            Copyright (c) {{ current_year }}
+        </p>
+    </div>
 
 
 {% endblock %}
