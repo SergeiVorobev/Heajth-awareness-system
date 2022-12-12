@@ -11,10 +11,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-
+import pandas as pd
+import plotly.express as px
+from plotly.offline import plot 
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from dashboard.models import HealthData
-
+from .utils import date_to_str
 
 @login_required(login_url='user:login')
 def home(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
@@ -32,18 +34,30 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     # Get current time
     time = now.strftime('%I:%M:%S %p')
 
-    health_data = HealthData.objects.all()
-    return render(request, 'base/home.html', {
-                    "year": year,
-                    "month": month,
-                    "month_number": month_number,
-                    "cal": cal,
-                    "current_year": current_year,
-                    "time": time,
-                    "health_data": health_data,
+    qs = HealthData.objects.all()
+   
+    x_gl = [0]
+    x_w = [0]
+    y = []
+    for data in qs:
+        x_gl.append(data.gl_level)
+        x_w.append(data.weight)
+        y.append(date_to_str(data.day))
 
-                  }
-                  )
+
+    context = {"year": year,
+                "month": month,
+                "month_number": month_number,
+                "cal": cal,
+                "current_year": current_year,
+                "time": time,
+                "health_data": qs,
+                "glucose": x_gl,
+                "weight": x_w,
+                "date": y,
+                }
+
+    return render(request, 'base/home.html', context)
 
 
 
