@@ -156,4 +156,4 @@ cython_debug/
 .vscode
 src/core/settings/local.py
 
-src/static/
+# src/static/
