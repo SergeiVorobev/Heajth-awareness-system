@@ -4,26 +4,53 @@
 
 {% block content %}
 
-    <style>
+<style>
     .my-custom-scrollbar {
     position: relative;
     height: 600px;
     overflow: auto;
     }
     img {
-        width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     }
-    </style>
+    *{padding:0;margin:0;}
+
+    body{
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:18px;
+    background-color:#CCC;
+    }
+
+    .float{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
+    background-color:#0C9;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    }
+
+    .my-float{
+    margin-top:22px;
+    }
+  </style>
     <hr class="mt-4">
 
     <div class="container">
         <div class="row">
+          
             <div class="col-md-12">
                 {% for i in cards %}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="{{i.img.url}}" height="450px" width="700px">
+                            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="{{i.img.url}}">
+                            <br>
                             <div class="card-block">
                                 <h5 class="card-title mt-2">
                                     {{i.title}}
@@ -42,37 +69,11 @@
             </div>
         </div>
     </div>
-        
-               {% comment %} <div class="row">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                    <ol class="carousel-indicators">
-                      <li type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-                      <li type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
-                      <li type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                     {% for c in cards %}
-                      <div class="carousel-item {% if forloop.counter0 == 0%} active {% endif %}">
-                        <img src="{{c.img.url}}" stule="height:585px" class="img-fluid d-block w-100" alt="...">
-                        
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5 class="animate_animated animate_fadeInDown">{{c.title}}</h5>
-                          <p class="animate_animated animate_zoomIn">{{c.description}}</p>
-                        </div>
-                      </div>
-                     {% endfor%}
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-               </div>
-          </div> {% endcomment %}
+    <a style="padding:10px;display:block;" href="{% url 'learning:main-view' %}" target="_blank">Start quiz</a>
 
+    <!-- Code begins here -->
 
+    <a href="{% url 'learning:main-view' %}" class="float">
+    <i class="fa fa-plus my-float"></i>
+    </a>
 {% endblock %}
