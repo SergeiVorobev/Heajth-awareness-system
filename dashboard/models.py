@@ -18,4 +18,7 @@ class HealthData(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(args, **kwargs)
+    
+    class Meta:
+        verbose_name_plural = 'Health Data'
 
