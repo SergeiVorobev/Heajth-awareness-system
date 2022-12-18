@@ -11,8 +11,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-import pandas as pd
-import plotly.express as px
 from plotly.offline import plot 
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from dashboard.models import HealthData

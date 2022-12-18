@@ -24,6 +24,7 @@ class Answer(models.Model):
     poits = models.IntegerField()
 
 
+
 class Suggestion(models.Model):
     """Class model for suggestion"""
 
@@ -31,3 +32,8 @@ class Suggestion(models.Model):
     poits_sum = models.IntegerField()
     risk_prediction = models.TextField()
     suggestion = models.TextField()
+
+class SliderModel(models.Model):
+    range_field = models.CharField(max_length=200)
+    name_range_field = models.CharField(max_length=200)
+    label_field = models.CharField(max_length=230)
