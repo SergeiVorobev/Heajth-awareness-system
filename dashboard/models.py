@@ -8,7 +8,7 @@ class HealthData(models.Model):
     # name = models.CharField(default='Glucose and weight', max_length=100)
     weight = models.FloatField()
     gl_level = models.IntegerField()
-    # height = models.IntegerField(default=180)
+    height = models.IntegerField(default=180)
     day = models.DateField(default=now,
         editable=True
         )

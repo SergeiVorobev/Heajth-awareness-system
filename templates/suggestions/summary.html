@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+
+
+<h1 class="center">Result</h1>
+<br>
+<p style="color: black; font-size:22px">Achieved points: {{points}} from {{ points_max }}</p>
+<p style="color: black; font-size:22px">You have a healthy life style for {{success}}%</p>
+<br>
+<p style="color: black; font-size:22px">RISK FORECAST: {{ forecast }}</p>
+<br>
+<p style="color: black; font-size:22px">SUGGESTION: {{ suggestion }}</p>
+<div class="center">
+    <a href="{% url 'suggestions:get-health-answers' %}" class="btn btn-secondary">COME BACK TO TEST</a>
+    <a href="{% url 'suggestions:print-suggestion' %}" class="btn btn-primary">Download Suggestion</a> 
+</>
+
+
+
+{% endblock %}

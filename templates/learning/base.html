@@ -26,11 +26,11 @@
     position:fixed;
     width:60px;
     height:60px;
-    bottom:40px;
+    bottom:200px;
     right:40px;
     background-color:#0C9;
     color:#FFF;
-    border-radius:50px;
+    border-radius:100px;
     text-align:center;
     box-shadow: 2px 2px 3px #999;
     }
@@ -69,11 +69,14 @@
             </div>
         </div>
     </div>
-    <a style="padding:10px;display:block;" href="{% url 'learning:main-view' %}" target="_blank">Start quiz</a>
-
-    <!-- Code begins here -->
-
-    <a href="{% url 'learning:main-view' %}" class="float">
-    <i class="fa fa-plus my-float"></i>
-    </a>
+    <a  class="btn btn-primary" style="position:fixed; 
+    width:60px;
+    height:60px;
+    bottom:200px;
+    right:40px;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;" 
+    href="{% url 'learning:main-view' %}" target="_blank">Start quiz</a>
+    
 {% endblock %}
