@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" ></script>
+<div>
+    <h1 class="center">Questionarious</h1>
+    <br/>
+    {% if submitted %}
+        <div class="center">
+            <h4>Dear '{{user}}', your suggestion is ready!</h4>
+            <br><br><br>
+            <a href="{% url 'suggestions:summary' %}" class="btn btn-primary"> SEE Result</a>
+        </div>
+    {% else %}
+        <form action="" method=POST>
+            {% csrf_token %}
+            {{form.as_p}}
+            <br><br>
+            <div class="center">
+                <a href="{%  url 'user:users-home' %}" class="btn btn-secondary">COME BACK</a>
+                <input type="submit" value="SUBMIT" class="btn btn-primary">
+            </div>
+            
+        </form>
+    {% endif %}
+    
+</div>
+
+{% endblock %}

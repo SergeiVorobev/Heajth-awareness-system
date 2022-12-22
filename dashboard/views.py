@@ -12,7 +12,7 @@ def add_health_data(request):
         form = HealthDataForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('add-health-data?submitted=True')
+            return HttpResponseRedirect('?submitted=True')
     else:
         form = HealthDataForm
         if 'submitted' in request.GET:
