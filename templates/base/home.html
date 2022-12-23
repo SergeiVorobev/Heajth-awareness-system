@@ -5,68 +5,101 @@
 {% block content %}
 
 <style>
-.my-custom-scrollbar {
-position: relative;
-height: 300px;
-overflow: auto;
-}
-.table-wrapper-scroll-y {
-display: block
-}
-.btn-toolbar {
-    position: absolute;
-}
-.calendar {
-    position: 
-}
+    .my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block
+    }
+    .btn-toolbar {
+        position: absolute;
+    }
+    .calendar {
+        position: 
+    }
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        padding: 20px;
+        font-size: 30px;
+    }
+    
+    
 </style>
+<div class="container">
+    <div class="center">
+        <h2>Health data</h2>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div>
+                <canvas id="Glucose"></canvas>
+            </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            
+            <script>
+            const ctx = document.getElementById('Glucose');
+            
+            const mixedChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    type: 'line',
+                    labels: {{date|safe}},
+                    datasets: [{
+                    label: 'Your Glucose, mg/dL',
+                    data: {{glucose|safe}},
+                    borderWidth: 2,
+                }, {
+                    type: 'line',
+                    labels: {{date|safe}},
+                    label: 'Prediabetes, mg/dL',
+                    data: {{prediab|safe}},
+                    borderWidth: 2
+    
+                }, {
+                    type: 'line',
+                    labels: {{date|safe}},
+                    label: 'Diabetes, mg/dL',
+                    data: {{diab|safe}},
+                    borderWidth: 2
+    
+                }]
+                },
+                options: {
+    
+                scales: {
+                    y: {
+                    min: 90
+                    }
+                }
+                }
+            });
+            </script>
+        </div> 
+        <div class="col-3">
+            <div class="center">
+                <div class="opaqueWhite">
+                    {{ cal|safe }}
+                    <br><br><br>
+                    <p>Current time: {{ time }}</p>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-9">
+            <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 600px; margin-left:auto; margin-right:auto;">
+                <tr>
+                    <td>Date</td>
+                    <td>Weight, kg</td>
+                    <td>Height, cm</td>
+                    <td>Glucose, mg/dL</td>
+                </tr>
 
-    <div class="center">
-        <div class="opaqueWhite" style=''>
-            {{ cal|safe }}
-        </div>
-    </div>
-    
-        <br/><br/><br/>
-    
-    <div class="center">
-        <p>
-        Current time: {{ time }}
-        </p>
-        <h1 class="opaqueWhite" style="text-align: center">Health data</h1>
-    </div>
-    <div>
-        <canvas id="Glucose"></canvas>
-      </div>
-      
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
-      <script>
-        const ctx = document.getElementById('Glucose');
-      
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: {{date|safe}},
-            datasets: [{
-              label: 'Glucose',
-              data: {{glucose|safe}},
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: false
-              }
-            }
-          }
-        });
-      </script>
-    <br/>
-    <br/>
-    <div class="center">
-        <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 300px; margin-left:auto; margin-right:auto;">
             {% for data in health_data %}
                 <tr>
                     <td>
@@ -76,29 +109,32 @@ display: block
                         <p style="color: black; font-size:22px">{{ data.weight }}</p>
                     </td>
                     <td>
+                        <p style="color: black; font-size:22px">{{ data.height }}</p>
+                    </td>
+                    <td>
                         <p style="color: black; font-size:22px">{{ data.gl_level }}</p>
                     </td>
                 </tr>
             {% endfor %}
         </table>
-    </div>
-    <br/>
-
-    <div class="center" role="toolbar" aria-label="Toolbar with button groups">
-        {% comment %} <div class="btn-group mr-2" role="group" aria-label="First group">
-            <a href="{%  url 'home' %}" class="btn btn-secondary" >BACK</a>
-        </div> {% endcomment %}
-        <div class="btn-group mr-2" role="group" aria-label="Second group">
-            <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
         </div>
-    </div>
-    <br/><br/><br/>
-    </div>
-        <div class="center">
-        <p>
-            Copyright (c) {{ current_year }}
-        </p>
-    </div>
+        <div class="col-3">
+            <br>
+            <br>
+            <br>
+            <br>
 
+            <div class="center" role="toolbar" aria-label="Toolbar with button groups">
+                {% comment %} <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a href="{%  url 'home' %}" class="btn btn-secondary" >BACK</a>
+                </div> {% endcomment %}
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
 
 {% endblock %}

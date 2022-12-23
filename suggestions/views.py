@@ -5,28 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 
 from .forms import QuestionaryForm
-from .models import QuestionaryModel, SuggestionModel, DIET_CHOICES, PHYS_EXS, BOOLEAN_CHOICE
-
-
-risk_forecast = [
-        "The risk to significantly increase Glucose level in your blood is very high.",
-        "The risk to significantly increase Glucose level in your blood is medium.",
-        "The risk to significantly increase Glucose level in your blood is low."]
-
-suggestions = [
-    "Visit a doctor! You urgently need to change your lifestyle and your diet.",
-    "Eat with diet. Do sport. Physical exercise helps lower your blood sugar level.You"+ 
-    " should aim for 2.5 hours of activity a week.Move a few minutes after 30 minutes sitting.",
-    "You are in good track to be healthy. Keep this style and you will decrease " +
-    "Glucose level  in your blood."
-]
-
-res = {}
-for key in risk_forecast:
-    for value in suggestions:
-        res[key] = value
-        suggestions.remove(value)
-        break
+from .models import QuestionaryModel, SuggestionModel
 
 
 @login_required(login_url='user:login')

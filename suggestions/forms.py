@@ -4,7 +4,11 @@ from django.forms import ModelForm
 
 from .models import QuestionaryModel
 class QuestionaryForm(ModelForm):
-    
+
+    # def __init__(self, user, *args, **kwargs):
+    #     self.user = user
+    #     super(QuestionaryForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = QuestionaryModel
         fields = (
