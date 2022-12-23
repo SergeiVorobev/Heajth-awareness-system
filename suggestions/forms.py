@@ -1,9 +1,8 @@
 # forms.py
 from django import forms
-from django_range_slider.fields import RangeSliderField
 from django.forms import ModelForm
 
-from .models import QuestionaryModel, DIET_CHOICES, PHYS_EXS, BOOLEAN_CHOICE
+from .models import QuestionaryModel
 class QuestionaryForm(ModelForm):
     
     class Meta:
