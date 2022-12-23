@@ -11,7 +11,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from plotly.offline import plot 
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from dashboard.models import HealthData
 from .utils import date_to_str
@@ -32,14 +31,20 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     # Get current time
     time = now.strftime('%I:%M:%S %p')
 
-    qs = HealthData.objects.all()
+    qs = HealthData.objects.filter(user= request.user)
    
     x_gl = [0]
     x_w = [0]
+    x_h = [0]
+    prediab = [0]
+    diab = [0]
     y = []
     for data in qs:
         x_gl.append(data.gl_level)
         x_w.append(data.weight)
+        x_h.append(data.height)
+        prediab.append(140)
+        diab.append(200)
         y.append(date_to_str(data.day))
 
 
@@ -51,7 +56,10 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
                 "time": time,
                 "health_data": qs,
                 "glucose": x_gl,
+                "prediab": prediab,
+                "diab": diab,
                 "weight": x_w,
+                "height": x_h,
                 "date": y,
                 }
 

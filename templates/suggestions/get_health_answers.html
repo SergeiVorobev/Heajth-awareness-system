@@ -1,15 +1,15 @@
 {% extends 'base/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% block title %} Suggestion {% endblock title%}
 {% block content %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
-<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" ></script>
-<div>
+<div class="container">
     <h1 class="center">Questionarious</h1>
     <br/>
     {% if submitted %}
         <div class="center">
-            <h4>Dear '{{user}}', your suggestion is ready!</h4>
+            <p>Dear '{{user}}', your suggestion is ready!</p>
             <br><br><br>
             <a href="{% url 'suggestions:summary' %}" class="btn btn-primary"> SEE Result</a>
         </div>
