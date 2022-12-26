@@ -30,23 +30,25 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     current_year = now.year
     # Get current time
     time = now.strftime('%I:%M:%S %p')
+    date = now.strftime('%m/%d/%Y %p')
 
-    qs = HealthData.objects.filter(user= request.user)
+    qs = HealthData.objects.filter(user=request.user)
    
-    x_gl = [0]
-    x_w = [0]
-    x_h = [0]
-    prediab = [0]
-    diab = [0]
+    x_gl = []
+    x_w = []
+    x_h = []
+    bmi = []
+    prediab = []
+    diab = []
     y = []
     for data in qs:
         x_gl.append(data.gl_level)
         x_w.append(data.weight)
         x_h.append(data.height)
+        bmi.append(round(data.weight/((data.height/100)**2), 1))
         prediab.append(140)
         diab.append(200)
         y.append(date_to_str(data.day))
-
 
     context = {"year": year,
                 "month": month,
@@ -54,13 +56,15 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
                 "cal": cal,
                 "current_year": current_year,
                 "time": time,
+                "date": date,
                 "health_data": qs,
                 "glucose": x_gl,
                 "prediab": prediab,
                 "diab": diab,
                 "weight": x_w,
                 "height": x_h,
-                "date": y,
+                "bmi": bmi,
+                "day": y,
                 }
 
     return render(request, 'base/home.html', context)

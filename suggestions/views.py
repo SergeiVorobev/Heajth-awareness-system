@@ -93,7 +93,6 @@ def print_suggestion(request):
     # Designate the Model
     q =  QuestionaryModel.objects.last()
     s = SuggestionModel.objects.last()
-    # if q.on_a_diet="YES":
     lines = []
     lines.append(f'\n\n\n\t\t\t\t\tSUGGESTION REPORT\n\n\n\t\tQUESTIONARY:\n\n\t\'Are you guided by a diet against diabetes?\': \'{q.on_a_diet}\'\n'
     f'\n\t\'How often do you take a meal without a diet per week?\': \'{q.diet_meal_quantity}\'\n'

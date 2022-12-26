@@ -47,21 +47,21 @@
                 type: 'bar',
                 data: {
                     type: 'line',
-                    labels: {{date|safe}},
+                    labels: {{day|safe}},
                     datasets: [{
                     label: 'Your Glucose, mg/dL',
                     data: {{glucose|safe}},
                     borderWidth: 2,
                 }, {
                     type: 'line',
-                    labels: {{date|safe}},
+                    labels: {{day|safe}},
                     label: 'Prediabetes, mg/dL',
                     data: {{prediab|safe}},
                     borderWidth: 2
     
                 }, {
                     type: 'line',
-                    labels: {{date|safe}},
+                    labels: {{day|safe}},
                     label: 'Diabetes, mg/dL',
                     data: {{diab|safe}},
                     borderWidth: 2
@@ -84,6 +84,7 @@
                 <div class="opaqueWhite">
                     {{ cal|safe }}
                     <br><br><br>
+                    <p>Today is: {{ date }}</p>
                     <p>Current time: {{ time }}</p>
                 </div>
             </div>
@@ -92,12 +93,14 @@
     <br><br>
     <div class="row">
         <div class="col-9">
-            <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 600px; margin-left:auto; margin-right:auto;">
+            <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 700px; margin-left:auto; margin-right:auto;">
                 <tr>
                     <td>Date</td>
+                    <td>Glucose, mg/dL</td>
                     <td>Weight, kg</td>
                     <td>Height, cm</td>
-                    <td>Glucose, mg/dL</td>
+                    <td>Index BMI, kg/m^2</td>
+                    <td>Details</td>
                 </tr>
 
             {% for data in health_data %}
@@ -106,14 +109,22 @@
                         <p style="color: black; font-size:22px">{{ data }}</p>
                     </td>
                     <td>
+                        <p style="color: black; font-size:22px">{{ data.gl_level }}</p>
+                    </td>
+                    <td>
                         <p style="color: black; font-size:22px">{{ data.weight }}</p>
                     </td>
                     <td>
                         <p style="color: black; font-size:22px">{{ data.height }}</p>
                     </td>
                     <td>
-                        <p style="color: black; font-size:22px">{{ data.gl_level }}</p>
+                        <p style="color: black; font-size:22px">{{ data.bmi}}</p>
                     </td>
+                    <td>
+                        <a href="{% url 'dashboard:show-health-data' data.id %}" 
+                        style="color: black; font-size:22px"> SEE </a>
+                    </td>
+                    
                 </tr>
             {% endfor %}
         </table>
