@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+     <div class="card">
+          <h5 class="card-header"> <strong>{{data}}</strong></h5>
+          <div class="card-body">
+            <h5 class="card-title">Health data details</h5>
+            <div>
+                <ul>
+                    <li>Date: {{ data.day}}</li>
+                    <li>Glucose Level, mg/dL: {{ data.gl_level}}</li>
+                    <li>Weight, kg: {{ data.weight}}</li>
+                    <li>Height, cm: {{ data.height}}</li>
+                    <li>Index BMI, kg/m^2: {{ data.bmi}}</li>
+                    <li><p>Comment:</p>
+                        <p>{{comment}}</p>
+                    </li>
+                 </ul>
+        </div>
+    <br/><br/>
+
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+         <a href="{%  url 'user:users-home' %}" class="btn btn-secondary" >BACK</a>
+      </div>
+      <div class="btn-group mr-2" role="group" aria-label="Second group">
+        <a href="{%  url 'dashboard:edit-health-data' data.id %}" class="btn btn-primary">EDIT DATA</a>
+     </div>
+    <div class="btn-group mr-2" role="group" aria-label="Third group">
+        <a href="{%  url 'dashboard:del-health-data' data.id %}" class="btn btn-danger">DELETE DATA</a>
+     </div>
+    </div>
+
+
+
+{% endblock %}
