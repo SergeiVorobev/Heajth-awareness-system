@@ -25,6 +25,7 @@
     <title>{% block title %} {% endblock %} </title>
 
   </head>
+ 
     <body style="
     background-position: center center;
     background-repeat: no-repeat;
@@ -79,43 +80,46 @@
         {% endblock %}
     </div>
     <br/>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom py-6 ">
+          <div class="container-fluid">
+              <ul class="navbar-nav mx-auto text-center nav-justified">
+                  {% if user.is_authenticated %}
 
-       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom py-6 ">
-            <div class="container-fluid">
-                <ul class="navbar-nav mx-auto text-center nav-justified">
-                    {% if user.is_authenticated %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'user:users-home' %}"><i class="fas fa-home"></i>Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'learning:list-cards' %}">
+                          <i class="fa-solid fa-graduation-cap"></i><br>Learning</a>
+                  </li>
+                  <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'suggestions:get-health-answers' %}">
+                      <i class="fa-solid fa-comment-medical"></i><br>Suggestions</a>
+                  </li>
+                  <a  class="btn btn-secondary" style="position:fixed; 
+                  width:60px;
+                  height:60px;
+                  bottom:130px;
+                  right:40px;
+                  border-radius:50px;
+                  text-align:center;
+                  box-shadow: 2px 2px 3px #999;" 
+                  onclick="window.print()" target="_blank"><i class="fa-solid fa-print"></i>Print page</a>
+                  {% endif %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user:users-home' %}"><i class="fas fa-home"></i>Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'learning:list-cards' %}">
-                            <i class="fa-solid fa-graduation-cap"></i><br>Learning</a>
-                    </li>
-                    <li class="nav-item" >
-                      <a class="nav-link" href="{% url 'suggestions:get-health-answers' %}">
-                        <i class="fa-solid fa-comment-medical"></i><br>Suggestions</a>
-                    </li>
-                    <li class="nav-item ">
-                      <a class="nav-link" href="
-                      {% comment %} {% url '' %} {% endcomment %}
-                      "><i class="fas fa-cog"></i><br>Settings</a>
-                    </li>
-                    {% endif %}
+              </ul>
 
-                </ul>
-
+          </div>
+      </nav>
+      {% if not user.is_authenticated%}
+          <footer class="bg-light text-center text-lg-start fixed-bottom">
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+              © 2022 Copyright:
+              {% comment %} <a class="text-dark" href="https:// ">www....com</a> {% endcomment %}
             </div>
-        </nav>
-       {% if not user.is_authenticated%}
-            <footer class="bg-light text-center text-lg-start fixed-bottom">
-              <!-- Copyright -->
-              <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2022 Copyright:
-                {% comment %} <a class="text-dark" href="https:// ">www....com</a> {% endcomment %}
-              </div>
 
-            </footer>
+          </footer>
        {% endif %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

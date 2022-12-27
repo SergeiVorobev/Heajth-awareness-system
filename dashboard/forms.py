@@ -2,6 +2,9 @@ from django import forms
 from .models import HealthData
 from django.forms import ModelForm
 
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 class HealthDataForm(ModelForm):
     class Meta:
         model = HealthData
@@ -20,6 +23,5 @@ class HealthDataForm(ModelForm):
             'weight': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'kg(like 90.3)'}),
             'gl_level': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'mg/dL'}),
             'height': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'cm'}),
-            'day': forms.TextInput(attrs={'class': 'form-control','placeholder': '2022-12-12'})
-
+            'day': forms.DateInput(),
         }
