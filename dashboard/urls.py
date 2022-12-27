@@ -6,7 +6,6 @@ from . import views
 app_name = 'dashboard'
 
 urlpatterns = [
-    # path('', views.home, name="users-home"),
     path('show-health-data/<data_id>', views.show_health_data, name='show-health-data'),
     path('add-health-data/', views.add_health_data, name='add-health-data'),
     path('edit_health-data/<data_id>', views.edit_health_data, name="edit-health-data"),

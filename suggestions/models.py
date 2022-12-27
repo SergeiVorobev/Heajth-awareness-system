@@ -47,8 +47,8 @@ class DIET_CHOICES(models.TextChoices):
     NEVER = 'I have no any diet'
 
 class PHYS_EXS(models.TextChoices):
-    YES_MORE_2H_PER_WEEK = 'Yes, and more then 2 hours per week'
-    YES_LESS_2H_PER_WEEK = 'Yes, but less then 2 hours per week'
+    Yes_and_more_2_hours_per_week = 'Yes, and more then 2 hours per week'
+    Yes_but_less_2_hours_per_week = 'Yes, but less then 2 hours per week'
     NO = 'No, I do not do any physical exercises'
 
 class BOOLEAN_CHOICE(models.TextChoices):

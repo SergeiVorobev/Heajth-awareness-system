@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.core.exceptions import ValidationError
+import datetime
 
 # Create your models here.
 class HealthData(models.Model):
@@ -8,9 +10,7 @@ class HealthData(models.Model):
     weight = models.FloatField()
     gl_level = models.IntegerField()
     height = models.IntegerField(default=180)
-    day = models.DateField(default=now,
-        editable=True
-        )
+    day = models.DateField(default=now,editable=True)
 
     # @property
     def bmi_calculate(self):
@@ -23,6 +23,8 @@ class HealthData(models.Model):
         return str(self.day)
     
     def save(self, *args, **kwargs):
+        if self.day > datetime.date.today():
+            raise ValidationError("The date cannot be in the future!")
         super().save(args, **kwargs)
     
     class Meta:
