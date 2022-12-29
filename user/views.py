@@ -46,8 +46,8 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
         x_w.append(data.weight)
         x_h.append(data.height)
         bmi.append(round(data.weight/((data.height/100)**2), 1))
-        prediab.append(140)
-        diab.append(200)
+        prediab.append(101)
+        diab.append(126)
         y.append(date_to_str(data.day))
 
     context = {"year": year,

@@ -37,14 +37,14 @@ def show_health_data(request, data_id):
     if data.day == datetime.date.today():
         time = 'is'
 
-    if data.gl_level < 140:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It is less then 140 mg/dL and it means, you have normal Glucose level."
+    if data.gl_level < 100:
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It is less then 100 mg/dL and it means, you have normal Glucose level."
 
-    if data.gl_level >= 140 and data.gl_level < 200:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 140 mg/dL and it means, you have prediabetes. You have Prediabetes."
+    if data.gl_level >= 101 and data.gl_level < 125:
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 100 mg/dL and it means, you have prediabetes. You have Prediabetes."
 
-    if data.gl_level > 200:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 200 mg/dL and it means, you have diabetes. Please visit your doctor for consultation."
+    if data.gl_level > 126:
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 125 mg/dL and it means, you have diabetes. Please visit your doctor for consultation."
 
     if data.bmi < 18.5:
         bmi_comment = f"Your body mass index(BMI) {time} {data.bmi}  kg/m^2. It is less then 18,5 kg/m^2 and it means, you have underweight."
