@@ -1,18 +1,16 @@
 from django import forms
+
 from .models import HealthData
-from django.forms import ModelForm
 
 
 class DateInput(forms.DateInput):
     input_type = 'date'
-class HealthDataForm(ModelForm):
+
+
+class HealthDataForm(forms.ModelForm):
     class Meta:
         model = HealthData
-        fields = (
-            'weight', 'gl_level',
-            'height', 
-            'day'
-            )
+        fields = ('weight', 'gl_level', 'height', 'day')
 
         labels = {
             'weight': 'Weight', 'gl_level': 'Glucose level',

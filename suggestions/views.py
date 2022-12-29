@@ -3,14 +3,27 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 
-
 from .forms import QuestionaryForm
 from .models import QuestionaryModel, SuggestionModel
 
+login_required(login_url='user:login')
+def get_health_answers(request):
+    submitted = False
+
+    if request.method == "POST":
+        form = QuestionaryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('?submitted=True')
+    else:
+        form = QuestionaryForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'suggestions/get_health_answers.html', {'form': form, 'submitted': submitted, 'user': request.user.username,})
 
 @login_required(login_url='user:login')
 def get_answers(request):
-
     qs = QuestionaryModel.objects.all().last()
     points = 0
     risk_forecast = [
@@ -68,22 +81,6 @@ def get_answers(request):
     
 
     return render(request, 'suggestions/summary.html', context)
-
-login_required(login_url='user:login')
-def get_health_answers(request):
-    submitted = False
-
-    if request.method == "POST":
-        form = QuestionaryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('?submitted=True')
-    else:
-        form = QuestionaryForm
-        if 'submitted' in request.GET:
-            submitted = True
-
-    return render(request, 'suggestions/get_health_answers.html', {'form': form, 'submitted': submitted, 'user': request.user.username})
 
 login_required(login_url='user:login')
 def print_suggestion(request):
