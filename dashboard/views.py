@@ -2,9 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 import datetime
-import io
-from django.http import FileResponse
-from reportlab.pdfgen import canvas
 
 from .forms import HealthDataForm
 from .models import HealthData
