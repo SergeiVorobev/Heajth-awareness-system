@@ -38,7 +38,7 @@ def show_health_data(request, data_id):
         gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It is less then 100 mg/dL and it means, you have normal Glucose level."
 
     if data.gl_level >= 101 and data.gl_level < 125:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 100 mg/dL and it means, you have prediabetes. You have Prediabetes."
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 100 mg/dL and it means, you have prediabetes."
 
     if data.gl_level > 126:
         gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 125 mg/dL and it means, you have diabetes. Please visit your doctor for consultation."
@@ -70,9 +70,9 @@ def edit_health_data(request, data_id):
     form = HealthDataForm(request.POST or None, instance=health_record)
     if form.is_valid():
         form.save()
-        return redirect('user:users-home', data_id)
+        return redirect('dashboard:show-health-data', data_id)
 
-    return render(request, 'dashboard/edit_data.html', {'record': health_record,'form': form})
+    return render(request, 'dashboard/edit_data.html', {'data': health_record,'form': form})
 
 login_required(login_url='user:login')
 def del_health_data(request, data_id):

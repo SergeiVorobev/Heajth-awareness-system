@@ -27,9 +27,9 @@ def get_answers(request):
     qs = QuestionaryModel.objects.all().last()
     points = 0
     risk_forecast = [
-        "The risk to significantly increase Glucose level in your blood is very high.",
-        "The risk to significantly increase Glucose level in your blood is medium.",
-        "The risk to significantly increase Glucose level in your blood is low."]
+        "You have a very high risk to significantly increase Glucose level in your blood soon",
+        "You have a medium risk to increase Glucose level in your blood.",
+        "You have a low risk to increase Glucose level in your blood."]
     suggestions = [
         "Visit a doctor! You urgently need to change your lifestyle and your diet.",
         "Eat with diet. Do sport. Physical exercise helps lower your blood sugar level.You\n"+ 
