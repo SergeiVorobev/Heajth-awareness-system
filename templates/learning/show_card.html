@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<style>
+    .tab {
+        display: inline-block;
+        margin-left: 40px;
+    }
+</style>
+<br/><br/>
+    <div class="card">
+          <h5 class="card-header"> <strong>Diabetes Fact N{{card.id}}</strong></h5>
+          <div class="card-body">
+            <h5 class="card-title">{{card.title}}</h5>
+            <div>
+                <div class="card">
+                    <img class="card-img-top" alt="Bootstrap Thumbnail First" src="{{card.img.url}}">
+                    <br>
+                    <div class="card-block">
+                        <p class="card-text" style="color: black; font-size:20px">
+                             <span class="tab"></span>{{card.description}}
+                        </p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br/><br/>
+
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a href="{%  url 'user:users-home' %}" class="btn btn-secondary" >BACK</a>
+                </div>
+            </div>
+
+{% endblock %}

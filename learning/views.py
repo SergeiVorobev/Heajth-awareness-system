@@ -15,6 +15,14 @@ def list_cards(request):
     cards = Material.objects.all().order_by('created_date')
     return render(request, 'learning/base.html', {"cards": cards})
 
+@login_required(login_url='user:login')
+def show_card(request, card_id):
+    card = Material.objects.get(pk=card_id)
+    return render(request, 'learning/show_card.html', {
+                      "card": card,
+                  })
+
+
 # @login_required(login_url='user:login')
 class QuizListView(ListView):
     model = Quiz 
