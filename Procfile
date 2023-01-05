@@ -1,1 +1,1 @@
-web: gunicorn HASTP.wsgi
+web: gunicorn core.wsgi

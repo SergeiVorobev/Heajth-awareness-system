@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import django_heroku
 import dj_database_url
 from decouple import config
 
@@ -33,7 +32,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hastp.com', 'hastp-production-42f9.up.railway.app', '127.0.0:1']
 
 
 # Application definition
@@ -125,6 +124,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+# AUTH_USER_MODEL = 'userauths.User'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
@@ -165,4 +165,5 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-django_heroku.settings(locals())
+
+CSRF_TRUSTED_ORIGINS = ['https://hastp.com', 'https://hastp-production-42f9.up.railway.app']
