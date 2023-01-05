@@ -22,7 +22,6 @@ def show_card(request, card_id):
                       "card": card,
                   })
 
-
 # @login_required(login_url='user:login')
 class QuizListView(ListView):
     model = Quiz 
@@ -44,7 +43,7 @@ def quiz_data_view(request, pk):
         questions.append({str(q): answers})
     return JsonResponse({
         'data': questions,
-        # 'time': quiz.time,
+        'time': quiz.time,
     })
 
 @login_required(login_url='user:login')
