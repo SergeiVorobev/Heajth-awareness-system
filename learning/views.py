@@ -1,5 +1,5 @@
 """Views for learning package"""
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.views.generic import ListView
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required

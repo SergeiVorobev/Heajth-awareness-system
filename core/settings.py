@@ -32,7 +32,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hastp.com', 'hastp-production-42f9.up.railway.app', '127.0.0:1']
+ALLOWED_HOSTS = ['hastp.com', 'hastp-production-42f9.up.railway.app', '127.0.0.1']
 
 
 # Application definition
