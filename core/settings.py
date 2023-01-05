@@ -167,4 +167,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_heroku.settings(locals())
 
-CSRF_TRUSTED_ORIGINS = ['hastp.com', 'https://hastp-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://hastp.com', 'https://hastp-production.up.railway.app']
