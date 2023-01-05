@@ -32,7 +32,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hastp.com', 'hastp-production.up.railway.app', 'https://web-production-5ea6.up.railway.app']
+ALLOWED_HOSTS = ['hastp.com', 'hastp-production.up.railway.app', 'https://web-production-5ea6.up.railway.app', '127.0.0:1']
 
 
 # Application definition
@@ -124,7 +124,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_USER_MODEL = 'userauths.User'
+# AUTH_USER_MODEL = 'userauths.User'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
