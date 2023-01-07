@@ -33,7 +33,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     date = now.strftime('%m/%d/%Y %p')
 
     qs = HealthData.objects.filter(user=request.user)
-   
+    reverse_qs = HealthData.objects.filter(user=request.user).order_by('-day')
     x_gl = []
     x_w = []
     x_h = []
@@ -58,6 +58,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
                 "time": time,
                 "date": date,
                 "health_data": qs,
+                "table_data": reverse_qs,
                 "glucose": x_gl,
                 "prediab": prediab,
                 "diab": diab,

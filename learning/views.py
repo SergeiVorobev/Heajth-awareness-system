@@ -43,7 +43,7 @@ def quiz_data_view(request, pk):
         questions.append({str(q): answers})
     return JsonResponse({
         'data': questions,
-        'time': quiz.time,
+        # 'time': quiz.time,
     })
 
 @login_required(login_url='user:login')

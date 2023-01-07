@@ -27,7 +27,8 @@ def add_health_data(request):
 login_required(login_url='user:login')
 def show_health_data(request, data_id):
     data = HealthData.objects.filter(user=request.user).get(pk=data_id)
-
+    gl_comment = ""
+    bmi_comment = ""
     if data.day < datetime.date.today():
         time = 'was'
 
@@ -35,19 +36,19 @@ def show_health_data(request, data_id):
         time = 'is'
 
     if data.gl_level < 100:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It is less then 100 mg/dL and it means, you have normal Glucose level."
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It is less then 100 mg/dL and it means you have no prediabetes or diabetes."
 
     if data.gl_level >= 101 and data.gl_level < 125:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 100 mg/dL and it means, you have prediabetes."
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 100 mg/dL and it means you have prediabetes."
 
     if data.gl_level > 126:
-        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 125 mg/dL and it means, you have diabetes. Please visit your doctor for consultation."
+        gl_comment = f"On {data.day} your Glucose level {time} {data.gl_level} mg/dL. It exceeds 125 mg/dL and it means you have diabetes. Please visit your doctor for consultation."
 
     if data.bmi < 18.5:
-        bmi_comment = f"Your body mass index(BMI) {time} {data.bmi}  kg/m^2. It is less then 18,5 kg/m^2 and it means, you have underweight."
+        bmi_comment = f"Your body mass index(BMI) {time} {data.bmi}  kg/m^2. It is less then 18,5 kg/m^2 and it means you have underweight."
 
     if data.bmi >= 18.5 and data.bmi <=24.9:
-        bmi_comment = f"Your body mass index(BMI) {time} {data.bmi} kg/m^2. It is in the range 18,5-24,5 kg/m^2 and it means, you have a normal weight."
+        bmi_comment = f"Your body mass index(BMI) {time} {data.bmi} kg/m^2. It is in the range 18,5-24,5 kg/m^2 and it means you have a normal weight."
 
     if data.bmi >= 25 and data.bmi <=29.9:
         bmi_comment = f"Your body mass index(BMI) {time} {data.bmi} kg/m^2. It is in the range 25-29,9 kg/m^2 and it means, you have overweight."

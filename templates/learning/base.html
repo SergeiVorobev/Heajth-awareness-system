@@ -38,6 +38,12 @@
     .my-float{
     margin-top:22px;
     }
+    td {
+        padding-left: 5px;
+        padding-bottom:3px;
+        font-size:20px;
+    }
+
 </style>
     <br>
     <br>
@@ -45,7 +51,7 @@
     <hr class="mt-4">
     <div class="container">
         <div class="row">
-            <div class="col-10" style="overflow-x:auto; height: 600px; overflow: auto">
+            <div class="col-10" style="overflow-x:auto; height: 650px; overflow: auto">
                 <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); margin-left:auto; margin-right:auto; height: 400px">
                     <thead>
                         <tr style="text-align:center">
@@ -59,15 +65,15 @@
                     <tbody>
                         <tr style="text-align:center">
                             <td>
-                                <p style="color: black; font-size:22px">{{ c.id }}</p>
+                                <p style="color: black;">{{ c.id }}</p>
                             </td>
                             <td>
-                                <p style="color: black; font-size:22px">
+                                <p style="color: black;">
                                     <a href="{% url 'learning:show-card' c.id %}">{{ c.title }}</a>
                                 </p>
                             </td>
                             <td>
-                                <img src="{{c.img.url}}" alt="" height=150>
+                                <img src="{{c.img.url}}" alt="" height=110>
                             </td>
                            
                         </tr>
@@ -77,40 +83,15 @@
             </div>
             <br>
         </div>
-        {% comment %} <div class="row">        
-            <div class="col-md-12">
-                {% for i in cards %}
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <img class="card-img-top" alt="Bootstrap Thumbnail First" src="{{i.img.url}}">
-                            <br>
-                            <div class="card-block">
-                                <h4 class="card-title mt-2">
-                                    {{i.title}}
-                                </h4>
-                                <p class="card-text">
-                                     {{i.description}}
-                                </p>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br><br><br>
-                {% endfor %}
-
-            </div>
-        </div> {% endcomment %}
     </div>
     <a  class="btn btn-primary" style="position:fixed; 
-    width:60px;
-    height:60px;
-    bottom:200px;
-    right:40px;
-    border-radius:50px;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;" 
+        width:60px;
+        height:60px;
+        bottom:200px;
+        right:40px;
+        border-radius:50px;
+        text-align:center;
+        box-shadow: 2px 2px 3px #999;" 
     href="{% url 'learning:main-view' %}" target="_blank">Start quiz</a>
     
 {% endblock %}

@@ -20,6 +20,11 @@
         padding: 20px;
         font-size: 30px;
     }
+    td {
+        padding-left: 5px;
+        padding-bottom:3px;
+        font-size:20px;
+    }
     
     
 </style>
@@ -103,27 +108,27 @@
                     </tr>
                 </thead>
 
-            {% for data in health_data %}
+            {% for data in table_data %}
                 <tbody>
                     <tr style="text-align:center">
                         <td>
-                            <p style="color: black; font-size:22px">{{ data }}</p>
+                            <p >{{ data }}</p>
                         </td>
                         <td>
-                            <p style="color: black; font-size:22px">{{ data.gl_level }}</p>
+                            <p style="color: black;">{{ data.gl_level }}</p>
                         </td>
                         <td>
-                            <p style="color: black; font-size:22px">{{ data.weight }}</p>
+                            <p style="color: black;">{{ data.weight }}</p>
                         </td>
                         <td>
-                            <p style="color: black; font-size:22px">{{ data.height }}</p>
+                            <p style="color: black;">{{ data.height }}</p>
                         </td>
                         <td>
-                            <p style="color: black; font-size:22px">{{ data.bmi}}</p>
+                            <p style="color: black;">{{ data.bmi}}</p>
                         </td>
                         <td>
                             <a href="{% url 'dashboard:show-health-data' data.id %}" 
-                            style="color: black; font-size:22px"> SEE </a>
+                            style="color: blue;"> SEE </a>
                         </td>
                     </tr>
                 </tbody>
@@ -135,7 +140,7 @@
 
             <div class="center" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                    <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
+                    <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Records</a>
                 </div>
             </div>
         </div>
