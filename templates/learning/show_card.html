@@ -2,16 +2,17 @@
 
 {% block content %}
 <style>
-    .tab {
-        display: inline-block;
-        margin-left: 40px;
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
     }
 </style>
-<br/><br/>
-    <div class="card">
-          <h5 class="card-header"> <strong>Diabetes Fact N{{card.id}}</strong></h5>
-          <div class="card-body">
-            <h5 class="card-title">{{card.title}}</h5>
+<br/>
+    <div class="card" style="width: 50rem;">
+        <h5 class="card-header"> <strong>Diabetes Fact N{{card.id}}</strong></h5>
+        <div class="card-body">
+            <h5 class="card-title" style="text-align:center">{{card.title}}</h5>
             <div>
                 <div class="card">
                     <img class="card-img-top" alt="Bootstrap Thumbnail First" src="{{card.img.url}}">
@@ -20,16 +21,25 @@
                         <p class="card-text" style="color: black; font-size:20px">
                              <span class="tab"></span>{{card.description}}
                         </p>
-                        <br>
                     </div>
                 </div>
             </div>
-            <br/><br/>
-
+            <br/>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
                     <a href="{%  url 'learning:list-cards' %}" class="btn btn-secondary" >BACK</a>
                 </div>
             </div>
+        </div>
+    </div>
+    <a  class="btn btn-primary" style="position:fixed; 
+        width:60px;
+        height:60px;
+        bottom:200px;
+        right:40px;
+        border-radius:50px;
+        text-align:center;
+        box-shadow: 2px 2px 3px #999;" 
+    href="{% url 'learning:main-view' %}" target="_blank">Start quiz</a>
 
 {% endblock %}
