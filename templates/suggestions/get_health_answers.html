@@ -7,7 +7,7 @@
     <br/>
     {% if submitted %}
         <div class="center">
-            <p>Dear '{{user}}', your suggestion is ready!</p>
+            <p style="font-size:22px">Dear '{{user}}', your suggestion is ready!</p>
             <br><br><br>
             <a href="{% url 'suggestions:summary' %}" class="btn btn-primary"> SEE Result</a>
         </div>
@@ -20,7 +20,6 @@
                 <a href="{%  url 'user:users-home' %}" class="btn btn-secondary">COME BACK</a>
                 <input type="submit" value="SUBMIT" class="btn btn-primary">
             </div>
-            
         </form>
     {% endif %}
     
