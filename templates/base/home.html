@@ -1,91 +1,146 @@
 {% extends 'base/base.html' %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 {% block title %} Home Page {% endblock title%}
 {% block content %}
 
-    <style>
-    .my-custom-scrollbar {
-    position: relative;
-    height: 300px;
-    overflow: auto;
-    }
-    .table-wrapper-scroll-y {
-    display: block;
-    }
-    </style>
+<style>
+    tr:nth-child(even){background-color: #f2f2f2}
 
-
-    <div class="item1" style="
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-color: honeydew;
-    ">
-   
-    </div>
-    <div class="center">
+    .btn-toolbar {
+        position: absolute;
+    }
+    .calendar {
+        position: 
+    }
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        padding: 20px;
+        font-size: 30px;
+    }
     
-        
-        </div>
-        
-        <div class="center">
-            <h2> Calendar for {{ month }} {{ year }}</h2>
-            <br/>
-        </div>
-        
-            <br/><br/>
-        
-        <div class="center">
-            <div class="opaqueWhite">
-                {{ cal|safe }}
+    
+</style>
+<div class="container">
+    <div class="center">
+        <h2>Health data</h2>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div>
+                <canvas id="Glucose"></canvas>
             </div>
-        </div>
+            
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            
+            <script>
+            const ctx = document.getElementById('Glucose');
+            
+            const mixedChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    type: 'line',
+                    labels: {{day|safe}},
+                    datasets: [{
+                        label: 'Your Glucose, mg/dL',
+                        data: {{glucose|safe}},
+                        borderWidth: 2,
+                        }, {
+                        label: 'Weight, kg',
+                        data: {{weight|safe}},
+                        borderWidth: 2,
+                        },{
+                        type: 'line',
+                        labels: {{day|safe}},
+                        label: 'Prediabetes, mg/dL',
+                        data: {{prediab|safe}},
+                        borderWidth: 2
         
-            <br/><br/><br/>
+                        }, {
+                        type: 'line',
+                        labels: {{day|safe}},
+                        label: 'Diabetes, mg/dL',
+                        data: {{diab|safe}},
+                        borderWidth: 2
         
-        <div class="center">
-            <p>
-            Current time: {{ time }}
-            </p>
-            <h1 class="opaqueWhite" style="text-align: center">Health data</h1>
-        </div>
-        <br/>
-        {% comment %} <form class="form-inline my-2 my-lg-0" method= POST action="{% url 'search-venues' %}">
-            {% csrf_token %}
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                        min: 50
+                        }
+                    }
+                }
+            });
+            </script>
+        </div> 
+        <div class="col-3">
+            <div class="center">
+                <div class="opaqueWhite">
+                    {{ cal|safe }}
+                    <br><br><br>
+                    <p>Today is: {{ date }}</p>
+                    <p>Current time: {{ time }}</p>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-10" style="overflow-x:auto; height: 400px; overflow: auto">
+            <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); margin-left:auto; margin-right:auto; height: 400px">
+                <thead>
+                    <tr style="text-align:center">
+                        <th>Date</th>
+                        <th>Glucose, mg/dL</th>
+                        <th>Weight, kg</th>
+                        <th>Height, cm</th>
+                        <th>Index BMI, kg/m^2</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
 
-            <input class="form-control mr-sm-2" type="search" placeholder="Venue" aria-label="Search" name="searched">
-            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" style="background-color: darkgrey">Search</button>
-
-        </form> {% endcomment %}
-        <br/>
-        <table class="table table-hover table-bordered" style="background-color: rgba(255, 255, 255, 0.8); width: 1000px">
             {% for data in health_data %}
-                <tr>
-                    <td>
-                        <p style="color: black; font-size:22px">{{ data }}</p>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr style="text-align:center">
+                        <td>
+                            <p style="color: black; font-size:22px">{{ data }}</p>
+                        </td>
+                        <td>
+                            <p style="color: black; font-size:22px">{{ data.gl_level }}</p>
+                        </td>
+                        <td>
+                            <p style="color: black; font-size:22px">{{ data.weight }}</p>
+                        </td>
+                        <td>
+                            <p style="color: black; font-size:22px">{{ data.height }}</p>
+                        </td>
+                        <td>
+                            <p style="color: black; font-size:22px">{{ data.bmi}}</p>
+                        </td>
+                        <td>
+                            <a href="{% url 'dashboard:show-health-data' data.id %}" 
+                            style="color: black; font-size:22px"> SEE </a>
+                        </td>
+                    </tr>
+                </tbody>
             {% endfor %}
         </table>
-        <br/>
-
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            {% comment %} <div class="btn-group mr-2" role="group" aria-label="First group">
-                <a href="{%  url 'home' %}" class="btn btn-secondary" >BACK</a>
-            </div> {% endcomment %}
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
-            </div>
-            </div>
-        <br/><br/><br/>
         </div>
-            <div class="center">
-            <p>
-               Copyright (c) {{ current_year }}
-            </p>
-        </div>
+        <div class="col-2">
+            <br><br><br><br><br><br><br>
 
+            <div class="center" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <a href="{%  url 'dashboard:add-health-data' %}" class="btn btn-primary">ADD Data</a>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
 
 {% endblock %}

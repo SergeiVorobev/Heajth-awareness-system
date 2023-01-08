@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% block content %} 
+<head>
+ {% block scripts %}
+ {% endblock scripts %}
+
+ <title>quiz app| {% block title %}{% endblock title %}</title>
+</head>
+<body>
+ <div class="container mt-3">
+     {% block content1 %}
+     {% endblock content1 %}
+ </div>
+
+</body>
+
+{% endblock %}

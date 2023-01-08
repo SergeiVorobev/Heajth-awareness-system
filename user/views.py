@@ -11,10 +11,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from dashboard.models import HealthData
-
+from .utils import date_to_str
 
 @login_required(login_url='user:login')
 def home(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
@@ -31,19 +30,44 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     current_year = now.year
     # Get current time
     time = now.strftime('%I:%M:%S %p')
+    date = now.strftime('%m/%d/%Y %p')
 
-    health_data = HealthData.objects.all()
-    return render(request, 'base/home.html', {
-                    "year": year,
-                    "month": month,
-                    "month_number": month_number,
-                    "cal": cal,
-                    "current_year": current_year,
-                    "time": time,
-                    "health_data": health_data,
+    qs = HealthData.objects.filter(user=request.user)
+   
+    x_gl = []
+    x_w = []
+    x_h = []
+    bmi = []
+    prediab = []
+    diab = []
+    y = []
+    for data in qs:
+        x_gl.append(data.gl_level)
+        x_w.append(data.weight)
+        x_h.append(data.height)
+        bmi.append(round(data.weight/((data.height/100)**2), 1))
+        prediab.append(101)
+        diab.append(126)
+        y.append(date_to_str(data.day))
 
-                  }
-                  )
+    context = {"year": year,
+                "month": month,
+                "month_number": month_number,
+                "cal": cal,
+                "current_year": current_year,
+                "time": time,
+                "date": date,
+                "health_data": qs,
+                "glucose": x_gl,
+                "prediab": prediab,
+                "diab": diab,
+                "weight": x_w,
+                "height": x_h,
+                "bmi": bmi,
+                "day": y,
+                }
+
+    return render(request, 'base/home.html', context)
 
 
 

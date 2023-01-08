@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<br/><br/>
+    <div class="card">
+          <h5 class="card-header" > <strong>Risk forecast, suggestion</strong></h5>
+          <div class="card-body">
+            <h5 class="card-title">Result</h5>
+            <div>
+                <ul>
+                    <li>Achieved points: {{points}} from {{ points_max }}.</li>
+                    <li>You have a healthy life style for {{success}}%.</li>
+                 </ul>
+            </div>
+            <h5 class="card-title">Forecast, suggestion</h5>
+            <div>
+                <ul>
+                    <li>RISK FORECAST:</li>
+                    <p>{{ forecast }}</p>
+                    <li>SUGGESTION:</li>
+                    <p>{{ suggestion }}</p>
+                    </li>
+                 </ul>
+            </div>
+            <br/>
+            <div class="center">
+                <a href="{% url 'suggestions:get-health-answers' %}" class="btn btn-secondary">COME BACK TO TEST</a>
+                <a href="{% url 'suggestions:print-suggestion' %}" class="btn btn-primary">Download Suggestion</a> 
+            </div>
+    </div>
+
+{% endblock %}
